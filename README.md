@@ -9,7 +9,12 @@ This repository contains the source code of DEXTER, a system to automatically ex
 
 ## System Requirements
 
-DEXTER runs on Python 3.10 and it is based on the [SpaCy library](https://spacy.io/) therefore make sure to [install](https://spacy.io/usage) it before running the code. 
+DEXTER is based on the [SpaCy library](https://spacy.io/) therefore make sure to [install](https://spacy.io/usage) it before running the code. A full list of library requirements is available in the file _requirements.txt_.
+
+To install the requirements run:
+```
+pip install -r requirements.txt
+```
 
 ## Data Format
 
@@ -33,12 +38,12 @@ The output is a csv files with the following columns:
 
 ## Running DEXTER
 
-To execute the code run (inside the py folder):
+To execute the code run:
 ```
-python dexter_pipeline.py [path_to_input_file] [path_to_output_file]
+python py/dexter_pipeline.py [path_to_input_file] [path_to_output_file]
 ```
 
-If you wish to run the code on the original data, unzip the data folder and run (inside the py folder):
+If you wish to run the code on the original data, unzip the data folder and run:
 ```
-python dexter_pipeline.py ../data/input/DEXTER_DATA.csv ../data/output/[filename].csv
+python py/dexter_pipeline.py data/input/DEXTER_DATA.csv data/output/[filename].csv
 ```
