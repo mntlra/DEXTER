@@ -1181,7 +1181,7 @@ def find_cmp_rule(sentence, cmps, triggers, verbose):
                     if verbose:
                         print('*** cmp_rule found: than_2_CE1')
                     return ["than_2_CE1", than_2_CE1]
-        elif cmp_word == "versus" or cmp_word == "vs.":
+        elif cmp_word.text.lower() == "versus" or cmp_word.text.lower() == "vs.":
             # Check 'versus' dependencies
             if cmp_word.dep_ == 'case':
                 # versus + in
@@ -1211,7 +1211,7 @@ def find_cmp_rule(sentence, cmps, triggers, verbose):
                 if verbose:
                     print('*** No cmp_rule found')
                 return None
-        elif cmp_word == "compared" or cmp_word == "comparison":
+        elif cmp_word.text.lower() == "compared" or cmp_word.text.lower() == "comparison":
             # if compared have no children with dependency "nmod" then both CEs depends on the SI
             if not [t for t in cmp_word.children if t.dep_ == "nmod"]:
                 # CE2 depends on SI

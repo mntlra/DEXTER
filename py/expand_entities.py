@@ -210,7 +210,6 @@ def extend_patients(doc, spans):
                         spans.append([t.i, t_e[0].end])
 
 
-@staticmethod
 def merge_spans(spans):
     """
     Merge spans w/ overlapping ranges
