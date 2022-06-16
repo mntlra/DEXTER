@@ -1156,86 +1156,85 @@ def find_cmp_rule(sentence, cmps, triggers, verbose):
     """
 
     for cmp_word in cmps:
-        match cmp_word.text.lower():
-            case "than":
-                # than + in
+        if cmp_word.text.lower() == "than":
+            # than + in
+            if [t for t in sentence if t.dep_ == 'case' and t.text == 'in' and t.head == cmp_word.head]:
+                # CE2 depends on SI
+                if cmp_word.head.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: than_1_SI')
+                    return ["than_1_SI", than_1_SI]
+                # CE2 depends on CE1
+                elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: than_1_CE1')
+                    return ["than_1_CE1", than_1_CE1]
+            # than
+            else:
+                # CE2 depends on SI
+                if cmp_word.head.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: than_2_SI')
+                    return ["than_2_SI", than_2_SI]
+                # CE2 depends on CE1
+                elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: than_2_CE1')
+                    return ["than_2_CE1", than_2_CE1]
+        elif cmp_word == "versus" or cmp_word == "vs.":
+            # Check 'versus' dependencies
+            if cmp_word.dep_ == 'case':
+                # versus + in
                 if [t for t in sentence if t.dep_ == 'case' and t.text == 'in' and t.head == cmp_word.head]:
                     # CE2 depends on SI
                     if cmp_word.head.head.lemma_ in triggers:
                         if verbose:
-                            print('*** cmp_rule found: than_1_SI')
-                        return ["than_1_SI", than_1_SI]
+                            print('*** cmp_rule found: vs_1_SI')
+                        return ["vs_1_SI", vs_1_SI]
                     # CE2 depends on CE1
-                    elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.head.lemma_ in triggers:
+                    elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.lemma_ in triggers:
                         if verbose:
-                            print('*** cmp_rule found: than_1_CE1')
-                        return ["than_1_CE1", than_1_CE1]
-                # than
+                            print('*** cmp_rule found: vs_1_CE1')
+                        return ["vs_1_CE1", vs_1_CE1]
                 else:
-                    # CE2 depends on SI
-                    if cmp_word.head.head.lemma_ in triggers:
+                    # versus with dep "case"
+                    if cmp_word.dep_ == 'case':
                         if verbose:
-                            print('*** cmp_rule found: than_2_SI')
+                            print('*** cmp_rule found: than_2')
                         return ["than_2_SI", than_2_SI]
-                    # CE2 depends on CE1
-                    elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.head.lemma_ in triggers:
-                        if verbose:
-                            print('*** cmp_rule found: than_2_CE1')
-                        return ["than_2_CE1", than_2_CE1]
-            case "versus" | "vs.":
-                # Check 'versus' dependencies
-                if cmp_word.dep_ == 'case':
-                    # versus + in
-                    if [t for t in sentence if t.dep_ == 'case' and t.text == 'in' and t.head == cmp_word.head]:
-                        # CE2 depends on SI
-                        if cmp_word.head.head.lemma_ in triggers:
-                            if verbose:
-                                print('*** cmp_rule found: vs_1_SI')
-                            return ["vs_1_SI", vs_1_SI]
-                        # CE2 depends on CE1
-                        elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.lemma_ in triggers:
-                            if verbose:
-                                print('*** cmp_rule found: vs_1_CE1')
-                            return ["vs_1_CE1", vs_1_CE1]
-                    else:
-                        # versus with dep "case"
-                        if cmp_word.dep_ == 'case':
-                            if verbose:
-                                print('*** cmp_rule found: than_2')
-                            return ["than_2_SI", than_2_SI]
-                # versus with dep "cc"
-                elif cmp_word.dep_ == 'cc':
+            # versus with dep "cc"
+            elif cmp_word.dep_ == 'cc':
+                if verbose:
+                    print('*** cmp_rule found: vs_2')
+                return ["vs_2", vs_2]
+            else:
+                if verbose:
+                    print('*** No cmp_rule found')
+                return None
+        elif cmp_word == "compared" or cmp_word == "comparison":
+            # if compared have no children with dependency "nmod" then both CEs depends on the SI
+            if not [t for t in cmp_word.children if t.dep_ == "nmod"]:
+                # CE2 depends on SI
+                if cmp_word.head.head.lemma_ in triggers:
                     if verbose:
-                        print('*** cmp_rule found: vs_2')
-                    return ["vs_2", vs_2]
+                        print('*** cmp_rule found: compare_1_SI')
+                    return ["compare_1_SI", compare_1_SI]
+                # CE2 depends on CE1
                 else:
                     if verbose:
-                        print('*** No cmp_rule found')
-                    return None
-            case "compared" | "comparison":
-                # if compared have no children with dependency "nmod" then both CEs depends on the SI
-                if not [t for t in cmp_word.children if t.dep_ == "nmod"]:
-                    # CE2 depends on SI
-                    if cmp_word.head.head.lemma_ in triggers:
-                        if verbose:
-                            print('*** cmp_rule found: compare_1_SI')
-                        return ["compare_1_SI", compare_1_SI]
-                    # CE2 depends on CE1
-                    else:
-                        if verbose:
-                            print('*** cmp_rule found: compare_1_CE1')
-                        return ["compare_1_CE1", compare_1_CE1]
-                else:
-                    # SI|n0 > compared|comparison > CE2
-                    if cmp_word.head.lemma_ in triggers:
-                        if verbose:
-                            print('*** cmp_rule found: compare_2')
-                        return ['compare_2', compare_2]
-                    # CE1 > compared|comparison > CE2, CE1 may depend on SI or CA
-                    elif cmp_word.head.head.lemma_ in triggers or cmp_word.head.head.head.lemma_ in triggers:
-                        if verbose:
-                            print('*** cmp_rule found: compare_3')
-                        return ['compare_3', compare_3]
+                        print('*** cmp_rule found: compare_1_CE1')
+                    return ["compare_1_CE1", compare_1_CE1]
+            else:
+                # SI|n0 > compared|comparison > CE2
+                if cmp_word.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: compare_2')
+                    return ['compare_2', compare_2]
+                # CE1 > compared|comparison > CE2, CE1 may depend on SI or CA
+                elif cmp_word.head.head.lemma_ in triggers or cmp_word.head.head.head.lemma_ in triggers:
+                    if verbose:
+                        print('*** cmp_rule found: compare_3')
+                    return ['compare_3', compare_3]
     if verbose:
         print('*** No cmp_rule found')
     return None

@@ -155,15 +155,14 @@ for index, row in df.iterrows():
                             else:
                                 ncbi_id = 'NA'
                             # --- Saving the results ---
-                            match cmp_type:
-                                case 'TypeA':
-                                    potential_row = [pmid, gene[0], ncbi_id, doid, doid_name, mention,
+                            if cmp_type == 'TypeA':
+                                potential_row = [pmid, gene[0], ncbi_id, doid, doid_name, mention,
                                                      disease_location, norm_level, cmp_type,
                                                      components['compared_entity_1'].text,
                                                      components['compared_entity_2'].text,
                                                      doc.text]
-                                case 'TypeB':
-                                    potential_row = [pmid, gene[0], ncbi_id, doid, doid_name, mention,
+                            elif cmp_type == 'TypeB':
+                                potential_row = [pmid, gene[0], ncbi_id, doid, doid_name, mention,
                                                      disease_location, norm_level, cmp_type,
                                                      components['compared_entity_1'].text, None,
                                                      doc.text]

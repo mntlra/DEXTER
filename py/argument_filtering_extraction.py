@@ -743,24 +743,23 @@ def get_comparison(components, sent_type):
 
     :return: flag set accordingly.
     """
-    match sent_type:
-        case 'TypeA':
-            if not isinstance(components['compared_entity_1'], spacy.tokens.token.Token):
-                # Check Compared Entity 1 contains a control trigger
-                control_1 = [t for t in components['compared_entity_1'] if t.lemma_ in control_trigs]
-                if control_1:
-                    return 'Control'
-                else:
-                    if not isinstance(components['compared_entity_2'], spacy.tokens.token.Token):
-                        # Check Compared Entity 2 contains a control trigger
-                        control_2 = [t for t in components['compared_entity_2'] if t.lemma_ in control_trigs]
-                        if control_2:
-                            return 'Control'
-            return 'Not-Control'
-        case 'TypeB':
-            # Check Scale Indicator
-            if components['scale_indicator'].lemma_ in control_implicit_trigs \
-                    or components['scale_indicator'].text.lower() in ['higher', 'lower']:
-                return 'Control_Implicit'
+    if sent_type == 'TypeA':
+        if not isinstance(components['compared_entity_1'], spacy.tokens.token.Token):
+            # Check Compared Entity 1 contains a control trigger
+            control_1 = [t for t in components['compared_entity_1'] if t.lemma_ in control_trigs]
+            if control_1:
+                return 'Control'
             else:
-                return 'none'
+                if not isinstance(components['compared_entity_2'], spacy.tokens.token.Token):
+                    # Check Compared Entity 2 contains a control trigger
+                    control_2 = [t for t in components['compared_entity_2'] if t.lemma_ in control_trigs]
+                    if control_2:
+                        return 'Control'
+        return 'Not-Control'
+    elif sent_type == 'TypeB':
+        # Check Scale Indicator
+        if components['scale_indicator'].lemma_ in control_implicit_trigs \
+                or components['scale_indicator'].text.lower() in ['higher', 'lower']:
+            return 'Control_Implicit'
+        else:
+            return 'none'
