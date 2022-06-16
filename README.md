@@ -1,5 +1,5 @@
 # DEXTER
-This repository contains the source code of DEXTER, a system to automatically extract Gene-Disease Associations from biomedical abstracts. The work was original presented in the paper by Gupta et al. [*'DEXTER: Disease-Expression Relation Extraction from Text'*](https://pubmed.ncbi.nlm.nih.gov/29860481/). This repository contains a reproduced version of the system described in the above mentioned paper. 
+This repository contains the source code of DEXTER, a system to automatically extract Gene-Disease Associations from biomedical abstracts. The work was originally presented in the paper by Gupta et al. [*'DEXTER: Disease-Expression Relation Extraction from Text'*](https://pubmed.ncbi.nlm.nih.gov/29860481/). This repository contains a reproduced version of the system described in the above mentioned paper. 
 
 **Contents**
 
