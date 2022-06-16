@@ -44,7 +44,7 @@ generic_diseases = ['tumor', 'cancer', 'disease', 'tumor metastases', 'infection
                     'cancerous', 'carcinoma', 'cancerous', 'metastasis']
 
 # Dictionary to map DOIDs to the Disease Name
-doid_to_names_json = str(Path(os.path.abspath(os.getcwd())).parent.absolute()) + "/data/input/" + 'doid_to_names.json'
+doid_to_names_json = str(Path(os.path.abspath(os.getcwd())).absolute()) + "/data/input/" + 'doid_to_names.json'
 with open(doid_to_names_json, 'r') as udf:
     doid_to_names = json.loads(udf.read())
 

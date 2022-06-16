@@ -25,7 +25,7 @@ disease_sample_trigs = ['tissue', 'cell', 'patient', 'sample', 'tumor', 'cancer'
 mi_regex = '(([a-z]{3,4}-)?(mi|Mi|MI)(RNA|R|r)s?(((([0-9]|[a-z])+)-[^ ,.]*)|((([0-9]|[a-z])+)|(-[^ ,.]*))))' + '|' + '([M,m]icro[-]?RNA(s?)-([0-9]|[a-z])+)'
 
 # Dictionary for mapping MESH IDs to DOIDs
-mesh_to_doid_json = str(Path(os.path.abspath(os.getcwd())).parent.absolute()) + "/data/input/" + 'mesh_to_doid.json'
+mesh_to_doid_json = str(Path(os.path.abspath(os.getcwd())).absolute()) + "/data/input/" + 'mesh_to_doid.json'
 with open(mesh_to_doid_json, 'r') as udf:
     mesh_to_doid = json.loads(udf.read())
 
