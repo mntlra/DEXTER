@@ -904,7 +904,7 @@ def relation_extraction(sentence, nlp, verbose=False, debug=False):
     :param sentence: (spacy.tokens.doc.Doc) input sentence
     :param nlp: (spacy.language) nlp object Spacy model.
     :param verbose: (Boolean) if True display diagnostic prints
-    :param debug: (Boolean) if True also return list of rules used
+    :param debug: (Boolean) if True not raise an exception but return 'rule_not_found'
 
     :return: list(dict()) list of dictionary of extracted components with the following keys: scale_indicator
             (spacy.tokens), compared_aspect (spacy.tokens.doc.Doc.ents), compared_entity_1 (spacy.tokens.doc.Doc.ents),
@@ -1273,7 +1273,7 @@ def find_rule_b(sentence, verbose):
         # express_location depends on level_indicator
         rules.append({'name': 'conj_expressionIn_1', 'starter': conj_exp, 'cmp': expressionIn_1})
         # express_location depends on expressed_aspect
-        rules.append({'name': 'conj_expressionIn_2', 'starter': subj_exp, 'cmp': expressionIn_2})
+        rules.append({'name': 'conj_expressionIn_2', 'starter': conj_exp, 'cmp': expressionIn_2})
     if appos_expIn_trigs:
         if verbose:
             print('Rules where EA is appos depending on head of level indicator can be applied')
