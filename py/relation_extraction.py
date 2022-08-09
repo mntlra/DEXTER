@@ -239,7 +239,7 @@ cmp3_n0_xcomp_n0 = [
         "RIGHT_ATTRS": {"DEP": "case", "ORTH": {"IN": ["in", "In"]}},
     }
 ]
-# SI is xcomp dep on cmp3 trig, all the rest depends on SI
+# SI is xcomp dep on compared_aspect, all the rest depends on SI
 cmp3_n0_xcomp_SI = [
     # Cond_1: {lemma:/.*(find|note|detect|observe|discover|occurred|occur)/}=N0
     # n0: found|noted|observed|...
@@ -505,7 +505,7 @@ than_2_CE1 = [
     },
 ]
 # versus with dep "cc"
-# CE2 depends on SI
+# CE2 depends on CE1
 vs_2 = [
     # Cond_4: {}=N0>/nmod:in/({}=N3 > /case/{word:(versus|vs.)})
     # compared_entity_1 -[conj]-> compared_entity_2
@@ -1107,8 +1107,6 @@ def find_rule(sentence, verbose):
                 rules.append({'name': 'cmp3_n0_amod_' + cmp_rule[0], 'starter': cmp3_n0_amod, 'cmp': cmp_rule[1]})
                 # SI is xcomp dep on compared_aspect, all the rest depends on cmp3 trig
                 rules.append({'name': 'cmp3_n0_xcomp_n0_' + cmp_rule[0], 'starter': cmp3_n0_xcomp_n0, 'cmp': cmp_rule[1]})
-                # SI is xcomp dep on cmp3 trig, all the rest depends on SI
-                rules.append({'name': 'cmp3_n0_xcomp_SI_' + cmp_rule[0], 'starter': cmp3_n0_xcomp_SI, 'cmp': cmp_rule[1]})
                 # CE1 depends on the scale_indicator, CE2 depends on the compared_aspect
                 rules.append({'name': 'cmp3_n1_' + cmp_rule[0], 'starter': cmp3_n1, 'cmp': cmp_rule[1]})
             else:
@@ -1197,11 +1195,16 @@ def find_cmp_rule(sentence, cmps, triggers, verbose):
                             print('*** cmp_rule found: vs_1_CE1')
                         return ["vs_1_CE1", vs_1_CE1]
                 else:
-                    # versus with dep "case"
-                    if cmp_word.dep_ == 'case':
+                    # CE2 depends on SI
+                    if cmp_word.head.head.lemma_ in triggers:
                         if verbose:
-                            print('*** cmp_rule found: than_2')
+                            print('*** cmp_rule found: than_2_SI')
                         return ["than_2_SI", than_2_SI]
+                    # CE2 depends on CE1
+                    elif cmp_word.head.head.head.lemma_ in triggers or cmp_word.head.head.head.lemma_ in triggers:
+                        if verbose:
+                            print('*** cmp_rule found: than_2_CE1')
+                        return ["than_2_CE1", than_2_CE1]
             # versus with dep "cc"
             elif cmp_word.dep_ == 'cc':
                 if verbose:
