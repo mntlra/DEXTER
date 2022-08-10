@@ -1366,8 +1366,7 @@ def extract_components(sentence, sen_type, matches, matcher, rule_name, nlp, ver
                 print(f'Extracting {patterns[i]["RIGHT_ID"]}, expanding {sentence[token_ids[i]].text}')
             # Skip components used only for semgrex matching
             if patterns[i]["RIGHT_ID"] in component_keys:
-                if patterns[i]["RIGHT_ID"] == 'n0' and (rule_name.startswith(('cmp1', 'cmp2', 'cmp3', 'cmp12')) or rule_name in
-                        ['subj_foundIn_1', 'subj_foundIn_2', 'dobj_foundIn_2', 'conj_foundIn_1', 'conj_foundIn_2']):
+                if patterns[i]["RIGHT_ID"] == 'n0' and rule_name.startswith(('cmp1', 'cmp2', 'cmp3_n0_xcomp_SI')):
                     # In such rules n0 corresponds to the scale_indicator
                     component = 'scale_indicator'
                 else:
