@@ -139,7 +139,7 @@ def get_annotations_list_pmids(pmids):
         for r in response.iter_lines():
             res = json.loads(r.decode('utf-8'))
             # Initialization of each dictionary-key value
-            annotations[res['id']] = {'abstract': {}, 'genes': {}, 'diseases': {}, 'diseases_title': {}}
+            annotations[res['id']] = {'genes': {}, 'diseases': {}, 'diseases_title': {}}
             for passage in res["passages"]:
                 # Retrieving abstract text and annotations
                 if passage['infons']['type'] == 'abstract':
