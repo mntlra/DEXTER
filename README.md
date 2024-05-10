@@ -5,7 +5,7 @@ If you make use of this code in your work, please kindly cite the following pape
 
 ```bibtex
 @inproceedings{menotti2023dexter,
-	author = {Menotti},
+	author = {Menotti, Laura},
 	booktitle = {Proc. of the 2nd Italian Conference on Big Data and Data Science (ITADATA 2023)},
 	series = {CEUR-WS Proceedings},
         volume = {3606},
