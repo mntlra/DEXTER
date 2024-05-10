@@ -8,11 +8,11 @@ If you make use of this code in your work, please kindly cite the following pape
 	author = {Menotti},
 	booktitle = {Proc. of the 2nd Italian Conference on Big Data and Data Science (ITADATA 2023)},
 	series = {CEUR-WS Proceedings},
-  volume = {3606},
+        volume = {3606},
 	publisher = {CEUR},
 	title = {Reproducibility and Generalization of a Relation Extraction System for Gene-Disease Associations},
 	year = {2023},
-  URL = {https://ceur-ws.org/Vol-3606/invited78.pdf}
+        URL = {https://ceur-ws.org/Vol-3606/invited78.pdf}
 }
 ```
 
