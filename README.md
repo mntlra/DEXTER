@@ -55,10 +55,12 @@ The output is a csv files with the following columns:
 
 To execute the code run:
 ```
-python py/dexter_pipeline.py [path_to_input_file] [path_to_output_file]
+cd py
+python dexter_pipeline.py [path_to_input_file] [path_to_output_file]
 ```
 
 If you wish to run the code on the original data, unzip the data folder and run:
 ```
-python py/dexter_pipeline.py data/input/DEXTER_DATA.csv data/output/[filename].csv
+cd py
+python dexter_pipeline.py ../data/input/DEXTER_DATA.csv ../data/output/[filename].csv
 ```
