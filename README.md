@@ -1,5 +1,20 @@
 # DEXTER
-This repository contains the source code of DEXTER, a system to automatically extract Gene-Disease Associations from biomedical abstracts. The work was originally presented in the paper by Gupta et al. [*'DEXTER: Disease-Expression Relation Extraction from Text'*](https://pubmed.ncbi.nlm.nih.gov/29860481/). This repository contains a reproduced version of the system described in the above mentioned paper. 
+This repository contains the source code of DEXTER, a system to automatically extract Gene-Disease Associations from biomedical abstracts. The work was originally presented in the paper by Gupta et al. [*'DEXTER: Disease-Expression Relation Extraction from Text'*](https://pubmed.ncbi.nlm.nih.gov/29860481/). This repository contains a reproduced version of the system described in the above-mentioned paper. 
+
+If you make use of this code in your work, please kindly cite the following paper:
+
+```bibtex
+@inproceedings{menotti2023dexter,
+	author = {Menotti},
+	booktitle = {Proc. of the 2nd Italian Conference on Big Data and Data Science (ITADATA 2023)},
+	series = {CEUR-WS Proceedings},
+  volume = {3606},
+	publisher = {CEUR},
+	title = {Reproducibility and Generalization of a Relation Extraction System for Gene-Disease Associations},
+	year = {2023},
+  URL = {https://ceur-ws.org/Vol-3606/invited78.pdf}
+}
+```
 
 **Contents**
 
@@ -9,7 +24,7 @@ This repository contains the source code of DEXTER, a system to automatically ex
 
 ## System Requirements
 
-DEXTER is based on the [SpaCy library](https://spacy.io/) therefore make sure to [install](https://spacy.io/usage) it before running the code. A full list of library requirements is available in the file _requirements.txt_.
+DEXTER is based on the [SpaCy library](https://spacy.io/) therefore make sure to [install](https://spacy.io/usage) the spacy library and the **"en-sci-sm"** model from [SciSpaCy]([https://spacy.io/](https://allenai.github.io/scispacy/)) before running the code. A full list of library requirements is available in the file _requirements.txt_.
 
 To install the requirements run:
 ```
