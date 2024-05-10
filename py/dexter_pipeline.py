@@ -205,4 +205,4 @@ with open(output_file, 'w') as csvfile:
 
 print("--- %s seconds ---" % (time.time() - start_time))
 print('tot docs to parse: ', tot_docs)
-print('Documents correctly parsed: ', tot_matched)
+print('Documents correctly parsed: ', len(pmids_matched.keys()))
